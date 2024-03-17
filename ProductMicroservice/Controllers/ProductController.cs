@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Transactions;
 using ProductMicroservice.Models;
 using ProductMicroservice.Repository;
+using PagedList;
 
 namespace ProductMicroservice.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/api")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -20,15 +21,21 @@ namespace ProductMicroservice.Controllers
             _productRepository = productRepository;
         }
 
-        // GET: api/<ProductController>
-        [HttpGet]
+        [HttpGet("products")]
         public IEnumerable<Product> GetAllProducts()
         {
             var products = _productRepository.GetProducts();
             return products;
         }
 
-        // GET api/<ProductController>/5
+        [HttpGet("products/paged")]
+        public IPagedList<Product> GetAllProductsPerPage([FromQuery(Name = "page")] int page, 
+                                                         [FromQuery(Name = "size")] int size)
+        {
+            var products = _productRepository.GetProductsPerPage(page, size);
+            return products;
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -42,7 +49,6 @@ namespace ProductMicroservice.Controllers
             return new OkObjectResult(product);
         }
 
-        // POST api/<ProductController>
         [HttpPost]
         public IActionResult Post([FromBody] Product product)
         {
@@ -54,7 +60,6 @@ namespace ProductMicroservice.Controllers
             }
         }
 
-        // PUT api/<ProductController>/5
         [HttpPut]
         public IActionResult Put([FromBody] Product product)
         {
@@ -70,7 +75,6 @@ namespace ProductMicroservice.Controllers
             return new NoContentResult();
         }
 
-        // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

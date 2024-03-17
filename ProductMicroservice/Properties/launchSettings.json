@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/product",
+      "launchUrl": "api/products",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "ProductMicroservice": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/product",
+      "launchUrl": "api/products",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -29,7 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/product",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/products",
       "publishAllPorts": true
     }
   }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PagedList;
 using ProductMicroservice.DBContexts;
 using ProductMicroservice.Models;
 using System;
@@ -30,6 +31,11 @@ namespace ProductMicroservice.Repository
         public IEnumerable<Product> GetProducts()
         {
             return _dbContext.Products.ToList();
+        }
+
+        public IPagedList<Product> GetProductsPerPage(int pageNumber, int pageSize)
+        {
+            return _dbContext.Products.ToPagedList(pageNumber, pageSize);
         }
 
         public void InsertProduct(Product product)
