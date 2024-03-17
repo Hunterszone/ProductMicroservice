@@ -74,8 +74,15 @@ namespace ProductMicroservice.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _productRepository.DeleteProduct(id);
-            return new OkResult();
+            var product = _productRepository.GetProductByID(id);
+
+            if (product != null)
+            {
+                _productRepository.DeleteProduct(id);
+                return new OkResult();
+            }
+
+            return new NotFoundResult();
         }
     }
 }
